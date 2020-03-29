@@ -1,7 +1,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable("incidents", function (table) {
     table.increments()
-    table.string("titulo").notNullable()
+    table.string("title").notNullable()
     table.string("description").notNullable()
     table.decimal("value").notNullable()
 
