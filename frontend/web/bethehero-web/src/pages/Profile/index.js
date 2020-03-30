@@ -16,6 +16,12 @@ export default function Profile() {
   const ongId = localStorage.getItem('ongId');
 
   useEffect(() => {
+    if (!ongId) {
+      history.push('/');
+    }
+  }, []);
+
+  useEffect(() => {
     api
       .get('/profiles', {
         headers: {
@@ -63,28 +69,32 @@ export default function Profile() {
       <h1>Casos cadastrados</h1>
 
       <ul>
-        {incidents.map((incident) => (
-          <li key={incident.id}>
-            <strong>CASO:</strong>
-            <p>{incident.title}</p>
-            <strong>DESCRIÇÃO:</strong>
-            <p>{incident.description}</p>
-            <strong>VALOR:</strong>
-            <p>
-              {Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              }).format(incident.value)}
-            </p>
+        {incidents.length > 0 ? (
+          incidents.map((incident) => (
+            <li key={incident.id}>
+              <strong>CASO:</strong>
+              <p>{incident.title}</p>
+              <strong>DESCRIÇÃO:</strong>
+              <p>{incident.description}</p>
+              <strong>VALOR:</strong>
+              <p>
+                {Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                }).format(incident.value)}
+              </p>
 
-            <button
-              type="button"
-              onClick={() => handleDeleteIncident(incident.id)}
-            >
-              <FiTrash2 size={20} color="#A8A8B3" />
-            </button>
-          </li>
-        ))}
+              <button
+                type="button"
+                onClick={() => handleDeleteIncident(incident.id)}
+              >
+                <FiTrash2 size={20} color="#A8A8B3" />
+              </button>
+            </li>
+          ))
+        ) : (
+          <h3>Sem casos cadastrados</h3>
+        )}
       </ul>
     </div>
   );

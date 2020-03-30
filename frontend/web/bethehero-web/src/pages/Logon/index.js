@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiLogIn } from 'react-icons/fi';
 import './styles.css';
@@ -11,6 +11,14 @@ export default function Logon() {
   const [id, setId] = useState('');
 
   const history = useHistory();
+
+  const ongId = localStorage.getItem('ongId');
+
+  useEffect(() => {
+    if (ongId) {
+      history.push('/profile');
+    }
+  }, []);
 
   async function handleLogin(e) {
     e.preventDefault();

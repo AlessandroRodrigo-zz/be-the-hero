@@ -86,3 +86,9 @@
   line-height: 21px;
   font-size: 16px;
 }
+
+.profile-container ul h3 {
+  color: #737380;
+  font-size: 20px;
+  font-weight: 500;
+}
